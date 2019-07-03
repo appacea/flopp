@@ -30,7 +30,19 @@ public class MainViewModel extends ViewModel {
 
     private ArtRepository repo ;
     private LiveData<Resource<List<Art>>> allArt;
+
+
+    private LiveData<List<Art>> paintings;
+    private LiveData<List<Art>> sculptures;
+    private LiveData<List<Art>> drawings;
+    private LiveData<List<Art>> photographs;
+    private LiveData<List<Art>> designs;
+
+
     MutableLiveData<String> modelFilter = new MutableLiveData<>();
+
+
+
     private LiveData<List<Art>> filteredArt  = Transformations.switchMap(modelFilter,
             new Function<String, LiveData<List<Art>>>() {
         @Override
@@ -43,6 +55,30 @@ public class MainViewModel extends ViewModel {
     public MainViewModel(ArtDatabase artDatabase, ArtsyService artsyService, RandomMeService randomMeService){
         repo = new ArtRepository(artDatabase.artDao(),artsyService,randomMeService);
         allArt = repo.loadArt();
+        //TODO: change paintings to update when allArt updates
+        paintings = repo.getArt("Painting");
+        sculptures = repo.getArt("Sculpture");
+        drawings = repo.getArt("Drawing, Collage or other Work on Paper");
+        photographs = repo.getArt("Photography");
+        designs = repo.getArt("Design/Decorative Art");
+    }
+
+
+
+    public LiveData<List<Art>> getSculptures() {
+        return sculptures;
+    }
+    public LiveData<List<Art>> getPaintings() {
+        return paintings;
+    }
+    public LiveData<List<Art>> getDrawings() {
+        return drawings;
+    }
+    public LiveData<List<Art>> getPhotographs() {
+        return photographs;
+    }
+    public LiveData<List<Art>> getDesigns() {
+        return designs;
     }
 
 

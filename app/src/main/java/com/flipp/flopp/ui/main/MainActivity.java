@@ -11,11 +11,14 @@ package com.flipp.flopp.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 import dagger.android.AndroidInjection;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,6 +31,12 @@ import com.flipp.flopp.common.architecture.Resource;
 import com.flipp.flopp.common.architecture.Status;
 import com.flipp.flopp.di.ViewModelFactory;
 import com.flipp.flopp.ui.main.pages.PagerAdapter;
+import com.flipp.flopp.ui.main.pages.designs.DesignsFragment;
+import com.flipp.flopp.ui.main.pages.drawings.DrawingsFragment;
+import com.flipp.flopp.ui.main.pages.explore.ExploreFragment;
+import com.flipp.flopp.ui.main.pages.paintings.PaintingsFragment;
+import com.flipp.flopp.ui.main.pages.photographs.PhotographsFragment;
+import com.flipp.flopp.ui.main.pages.sculptures.SculpturesFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import javax.inject.Inject;
@@ -66,81 +75,94 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        TabLayout.Tab tab = tlMain.getTabAt(SCROLLABLE_TABS_POSITION);
-        View v = LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-        tab.setCustomView(v);
+//        TabLayout.Tab tab = tlMain.getTabAt(SCROLLABLE_TABS_POSITION);
+//        View v = LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
+//        tab.setCustomView(v);
 
 
 
-        View root = tlMain.getChildAt(0);
-        if (root instanceof LinearLayout) {
-            ((LinearLayout) root).setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
-            GradientDrawable drawable = new GradientDrawable();
-            drawable.setColor(getResources().getColor(R.color.colorAccent));
-            drawable.setSize(2, 1);
-            ((LinearLayout) root).setDividerPadding(10);
-            ((LinearLayout) root).setDividerDrawable(drawable);
-        }
+//        View root = tlMain.getChildAt(0);
+//        if (root instanceof LinearLayout) {
+//            ((LinearLayout) root).setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+//            GradientDrawable drawable = new GradientDrawable();
+//            drawable.setColor(getResources().getColor(R.color.colorAccent));
+//            drawable.setSize(2, 1);
+//            ((LinearLayout) root).setDividerPadding(10);
+//            ((LinearLayout) root).setDividerDrawable(drawable);
+//        }
+
 
         pagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        pagerAdapter.addFragment(new ExploreFragment(),getString(R.string.tab_explore));
+        pagerAdapter.addFragment(new PaintingsFragment(),getString(R.string.tab_paintings));
+        pagerAdapter.addFragment(new SculpturesFragment(),getString(R.string.tab_sculptures));
+        pagerAdapter.addFragment(new DrawingsFragment(),getString(R.string.tab_drawings));
+        pagerAdapter.addFragment(new PhotographsFragment(),getString(R.string.tab_photographs));
+        pagerAdapter.addFragment(new DesignsFragment(),getString(R.string.tab_designs));
         viewPager.setAdapter(pagerAdapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tlMain));
-
-        tlMain.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-                viewPager.setCurrentItem(tab.getPosition());
-
-                if(tab.getPosition()==0){
-                    TabLayout.Tab tab1 = tlScroll.getTabAt(0);
-                    tab1.select();
-                    tlScroll.getTabSelectedIndicator().setVisible(false,true);
-                  //  tlScroll.setSelectedTabIndicatorHeight(0);
-                    tlScroll.setSelectedTabIndicatorColor(Color.TRANSPARENT);
-
-                }
-                tab.select();
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-        LinearLayout layout = ((LinearLayout) ((LinearLayout) tlMain.getChildAt(0)).getChildAt(0));
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) layout.getLayoutParams();
-        layoutParams.weight = 0f;
-        layout.setMinimumWidth(200);
-        layoutParams.width = LinearLayout.LayoutParams.WRAP_CONTENT;
-        layout.setLayoutParams(layoutParams);
 
 
 
-        tlScroll = v.findViewById(R.id.tlScroll);
-        tlScroll.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                tlScroll.setSelectedTabIndicatorColor(Color.WHITE);
-                viewPager.setCurrentItem(SCROLLABLE_TABS_POSITION);
-            }
+       // viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tlMain));
+        tlMain.setupWithViewPager(viewPager);
+//        tlMain.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//
+//
+//                mainViewModel.filterModel("Sculpture");
+//
+//                viewPager.setCurrentItem(tab.getPosition());
+//
+////                if(tab.getPosition()==0){
+////                    TabLayout.Tab tab1 = tlScroll.getTabAt(0);
+////                    tab1.select();
+////                    tlScroll.getTabSelectedIndicator().setVisible(false,true);
+////                  //  tlScroll.setSelectedTabIndicatorHeight(0);
+////                    tlScroll.setSelectedTabIndicatorColor(Color.TRANSPARENT);
+////
+////                }
+////                tab.select();
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
+//            }
+//        });
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
+//        LinearLayout layout = ((LinearLayout) ((LinearLayout) tlMain.getChildAt(0)).getChildAt(0));
+//        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) layout.getLayoutParams();
+//        layoutParams.weight = 0f;
+//        layout.setMinimumWidth(200);
+//        layoutParams.width = LinearLayout.LayoutParams.WRAP_CONTENT;
+//        layout.setLayoutParams(layoutParams);
 
-            }
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
 
-            }
-        });
+//        tlScroll = v.findViewById(R.id.tlScroll);
+//        tlScroll.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                tlScroll.setSelectedTabIndicatorColor(Color.WHITE);
+//                viewPager.setCurrentItem(SCROLLABLE_TABS_POSITION);
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
+//            }
+//        });
 
 
 
@@ -163,6 +185,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.actionbar, menu);
+
+        Drawable drawable = menu.findItem(R.id.account).getIcon();
+        drawable = DrawableCompat.wrap(drawable);
+        DrawableCompat.setTint(drawable, ContextCompat.getColor(this,R.color.colorAccent));
+        menu.findItem(R.id.account).setIcon(drawable);
+
         return true;
     }
 }

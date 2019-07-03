@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">flopp</string>
     <string name="artsy_key">flopp</string>
+    <string name="tab_explore">Explore</string>
+    <string name="tab_paintings">Paintings</string>
+    <string name="tab_sculptures">Sculptures</string>
+    <string name="tab_drawings">Drawings</string>
+    <string name="tab_photographs">Photographs</string>
+    <string name="tab_designs">Designs</string>
+
 </resources>

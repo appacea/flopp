@@ -11,10 +11,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/acccount"
+        android:id="@+id/account"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_baseline_person_24px"
-        android:tint="@color/colorAccent">
+        android:icon="@drawable/ic_baseline_person_24px">
     </item>
     <item
         android:id="@+id/miProfile"

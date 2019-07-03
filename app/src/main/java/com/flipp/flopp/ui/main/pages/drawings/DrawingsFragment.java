@@ -2,12 +2,12 @@
  * Copyright (c) Tchipr Ltd 2019. All right reserved.
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * Created by Yvan Stern on 7/2/19 10:29 PM
+ * Created by Yvan Stern on 7/3/19 12:18 AM
  *
- * Last modified 7/2/19 10:29 PM
+ * Last modified 7/3/19 12:14 AM
  */
 
-package com.flipp.flopp.ui.main.pages.paintings;
+package com.flipp.flopp.ui.main.pages.drawings;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.flipp.flopp.R;
-import com.flipp.flopp.common.architecture.Status;
 import com.flipp.flopp.data.art.local.Art;
 import com.flipp.flopp.ui.main.MainViewModel;
 import com.flipp.flopp.ui.main.pages.ArtAdapter;
@@ -29,7 +28,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class PaintingsFragment extends Fragment {
+public class DrawingsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -42,9 +41,9 @@ public class PaintingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
-        View view = inflater.inflate(R.layout.fragment_paintings, container, false);
+        View view = inflater.inflate(R.layout.fragment_sculptures, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.rvPaintings);
+        recyclerView = (RecyclerView) view.findViewById(R.id.rvSculptures);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -55,16 +54,7 @@ public class PaintingsFragment extends Fragment {
         MainViewModel model = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
 
 
-//        model.getFilteredArt().observe(this.getViewLifecycleOwner(), new Observer<List<Art>>() {
-//            @Override
-//            public void onChanged(List<Art> arts) {
-//                artworks.clear();
-//                artworks.addAll(arts);
-//                adapter.notifyDataSetChanged();
-//            }
-//        });
-
-        model.getPaintings().observe(this.getViewLifecycleOwner(), new Observer<List<Art>>() {
+        model.getDrawings().observe(this.getViewLifecycleOwner(), new Observer<List<Art>>() {
             @Override
             public void onChanged(List<Art> arts) {
                 artworks.clear();
@@ -72,8 +62,6 @@ public class PaintingsFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
-
-        //model.filterModel("Painting");
 
 
         return view;

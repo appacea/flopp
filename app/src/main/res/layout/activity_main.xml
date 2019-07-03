@@ -28,29 +28,58 @@
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"  />
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tlMain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:tabMaxWidth="0dp"
-            app:tabGravity="fill"
-            app:tabMode="fixed"
-            android:descendantFocusability = "afterDescendants"
-            app:tabPaddingStart="0dp"
-            app:tabPaddingEnd="0dp">
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tlMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabMode="scrollable"
+                app:tabPaddingStart="10dp"
+                app:tabPaddingEnd="10dp">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_baseline_favorite_border_24px"/>
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Painting" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sculpture" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Drawing" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Photography" />
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Decorative" />
+            </com.google.android.material.tabs.TabLayout>
+
+        </LinearLayout>
 
 
-        </com.google.android.material.tabs.TabLayout>
+
+
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager

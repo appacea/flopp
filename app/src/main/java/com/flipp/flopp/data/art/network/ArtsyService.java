@@ -14,6 +14,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ArtsyService {
 
@@ -21,7 +22,7 @@ public interface ArtsyService {
     @POST("api/tokens/xapp_token")
     Call<ArtsyToken> getToken(@Body ArtsyToken token);
 
-    @GET("api/artworks")
+    @GET("api/artworks?size=100")
     Call<ArtsyResponse> getArt();
 
 }
