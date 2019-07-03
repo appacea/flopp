@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) Tchipr Ltd 2019. All right reserved.
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Created by Yvan Stern on 7/2/19 5:17 PM
+  ~
+  ~ Last modified 7/2/19 5:17 PM
+  -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:bottom="10dp"
+        android:left="10dp"
+        android:right="10dp"
+        android:top="10dp">
+
+        <selector xmlns:android="http://schemas.android.com/apk/res/android">
+            <item
+                android:drawable="@drawable/ic_baseline_favorite_border_24px"
+                android:state_checked="false"/>
+            <item
+                android:drawable="@drawable/ic_baseline_favorite_24px"
+                android:state_checked="true"/>
+            <item
+                android:drawable="@drawable/ic_baseline_favorite_border_24px"/>
+        </selector>
+    </item>
+</layer-list>

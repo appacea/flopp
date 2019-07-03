@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) Tchipr Ltd 2019. All right reserved.
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Created by Yvan Stern on 6/29/19 12:05 AM
+  ~
+  ~ Last modified 6/29/19 12:05 AM
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/navigation_songs"
+            android:title="Songs"/>
+
+        <item
+            android:id="@+id/navigation_albums"
+            android:title="Albums"/>
+
+        <item
+            android:id="@+id/navigation_artists"
+            android:title="Artists"/>
+
+</menu>
