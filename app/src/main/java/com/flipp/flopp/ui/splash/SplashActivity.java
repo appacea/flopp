@@ -9,6 +9,8 @@
 
 package com.flipp.flopp.ui.splash;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,40 +29,29 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class SplashActivity extends AppCompatActivity {
 
-
+    private ImageView ivLogo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        ivLogo = (ImageView) findViewById(R.id.ivLogo);
+        fadeIn(ivLogo);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //When visible show the logo with alpha animation
-        ImageView ivLogo = (ImageView) findViewById(R.id.ivLogo);
-        ivLogo.setVisibility(View.INVISIBLE);
-        AlphaAnimation animation1 = new AlphaAnimation(0.0f, 1.0f);
-        animation1.setFillAfter(true);
-        animation1.setDuration(500);
-        animation1.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                // pass it visible before starting the animation
-                ivLogo.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {    }
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                //On animation complete go to main activity
-                Intent mainActivity = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(mainActivity);
-                finish();
-
-            }
-        });
-        ivLogo.startAnimation(animation1);
+    private void fadeIn(View view){
+        view.setAlpha(0f);
+        view.setVisibility(View.VISIBLE);
+        view.animate()
+                .alpha(1f)
+                .setDuration(1000)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        //On animation complete go to main activity
+                        Intent mainActivity = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(mainActivity);
+                        finish();
+                    }
+                });
     }
 }

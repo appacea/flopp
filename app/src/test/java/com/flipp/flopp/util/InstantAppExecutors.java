@@ -13,6 +13,11 @@ import com.flipp.flopp.common.architecture.AppExecutors;
 
 import java.util.concurrent.Executor;
 
+/**
+ * Executors to use for testing
+ *
+ * We use this to avoid issues with mockito (ex. unsupported threading classes)
+ */
 public class InstantAppExecutors extends AppExecutors {
     private static Executor instant = command -> command.run();
 

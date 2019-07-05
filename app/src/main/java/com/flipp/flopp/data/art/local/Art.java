@@ -23,7 +23,9 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 /**
- * Local entity for Artwork
+ * Class that represents an artwork
+ *
+ * This is the Artsy data structure which we use internally in the app
  *
  */
 @Entity
@@ -46,14 +48,11 @@ public class Art implements Parcelable {
     @Embedded
     private ArtOwner owner;
 
-    public int getUntilDayOfWeek() {
-        return untilDayOfWeek;
-    }
 
-    public void setUntilDayOfWeek(int untilDayOfWeek) {
-        this.untilDayOfWeek = untilDayOfWeek;
-    }
-
+    /**
+     * Get a human readable day of week  (used to simulate deal expiry)
+     * @return
+     */
     public String getReadableUntil(){
         switch(this.untilDayOfWeek){
             case 1:
@@ -75,6 +74,22 @@ public class Art implements Parcelable {
         }
     }
 
+    /**
+     * Get a human readable price string
+     * @return
+     */
+    public String getReadablePrice(){
+        return "$"+getPrice() + "/mth";
+    }
+
+
+    public int getUntilDayOfWeek() {
+        return untilDayOfWeek;
+    }
+
+    public void setUntilDayOfWeek(int untilDayOfWeek) {
+        this.untilDayOfWeek = untilDayOfWeek;
+    }
 
     public boolean isFavorite() {
         return isFavorite;
@@ -92,9 +107,6 @@ public class Art implements Parcelable {
         this.city = city;
     }
 
-    public String getReadablePrice(){
-        return "$"+getPrice() + "/mth";
-    }
     public String getTitle() {
         return title;
     }

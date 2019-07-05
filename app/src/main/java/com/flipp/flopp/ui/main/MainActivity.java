@@ -56,11 +56,12 @@ public class MainActivity extends AppCompatActivity {
     //Fragment that embeds a viewpager
     private ViewPagerFragment viewPagerFragment;
     //Progress dialog displayed during loading
-    private ProgressDialog dialog;
+    private ProgressDialog progressDialog;
 
     @Inject
     ViewModelFactory viewModelFactory;
 
+    //The viemodel for this view
     private MainViewModel mainViewModel;
 
     @Override
@@ -74,27 +75,26 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        dialog = new ProgressDialog(this);
-        dialog.setMessage(getString(R.string.loading));
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getString(R.string.loading));
 
         tlMain = (TabLayout) findViewById(R.id.tlMain);
-        //remove highlight on tabs
+        //remove highlight on tabs since we don't want to have a highlight when favorites is selected
         tlMain.setTabTextColors(ContextCompat.getColor(MainActivity.this,R.color.colorAccent),ContextCompat.getColor(MainActivity.this,R.color.colorAccent));
 
         viewPager = (ParentViewPager) findViewById(R.id.viewPager);
         ivFavorite = (ImageView) findViewById(R.id.ivFavorite);
 
+
+        //If we click favorites, hide the tab indicator
+        //Ideally we would animate the indicator to the favorites position but I had some problems making it seamless.
         ivFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //If we click favorites, hide the tab indicator
-                //Ideally we would animate the indicator to the favorites position but I had some problems making it seamless.
                 ivFavorite.setImageResource(R.drawable.ic_baseline_favorite_24px);
                 tlMain.getTabAt(0).select();
                 viewPager.setCurrentItem(0); //move to first page
                 tlMain.setSelectedTabIndicatorColor(Color.TRANSPARENT);
-
-
             }
         });
 
@@ -133,14 +133,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //Get viewmodel
+        //Get main viewmodel
         mainViewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel.class);
         mainViewModel.getAllArt().observe(this, resource -> {
             if(resource.status == Status.LOADING) {
-                dialog.show();
+                progressDialog.show();
             }
             else  {
-                dialog.hide();
+                progressDialog.hide();
             }
         });
 
@@ -169,8 +169,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Hide the custom indicator for now, will try to fix it later so that animations are smooth from favorites to tablayout
         vIndicator = findViewById(R.id.vIndicator);
         vIndicator.setVisibility(View.GONE);
+
         mainViewModel.city.setValue(mainViewModel.getCity());
 
     }
@@ -221,6 +223,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
+    /**
+     * Dismiss progressdialog on destroy to avoid memory leak
+     */
+    @Override
+    protected void onDestroy() {
+        if(progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
+        super.onDestroy();
+    }
 }
