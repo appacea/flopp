@@ -68,6 +68,7 @@ public class FavoritesFragment extends Fragment {
 
         model = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
 
+        //Observe favorites
         model.getFavorites().observe(this.getViewLifecycleOwner(), new Observer<List<Art>>() {
             @Override
             public void onChanged(List<Art> arts) {

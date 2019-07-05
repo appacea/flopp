@@ -68,7 +68,7 @@ public class SculpturesFragment extends Fragment {
 
         model = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
 
-
+        //Observe Sculptures
         model.getSculptures().observe(this.getViewLifecycleOwner(), new Observer<List<Art>>() {
             @Override
             public void onChanged(List<Art> arts) {

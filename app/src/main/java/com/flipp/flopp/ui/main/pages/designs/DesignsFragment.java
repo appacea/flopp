@@ -45,7 +45,6 @@ public class DesignsFragment extends Fragment {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_designs, container, false);
-
         recyclerView = (RecyclerView) view.findViewById(R.id.rvDesigns);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
@@ -68,8 +67,7 @@ public class DesignsFragment extends Fragment {
 
         model = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
 
-
-
+        //Observe changes in designs list
         model.getDesigns().observe(this.getViewLifecycleOwner(), new Observer<List<Art>>() {
             @Override
             public void onChanged(List<Art> arts) {

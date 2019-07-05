@@ -71,7 +71,7 @@ public class ArtRepository {
 
             @Override
             protected boolean shouldFetch(@Nullable List<Art> data) {
-
+                //Always fetch since this is a demo
                 return true;
             }
 

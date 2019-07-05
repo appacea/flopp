@@ -68,7 +68,7 @@ public class DrawingsFragment extends Fragment {
 
         model = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
 
-
+        //Observe changes in drawings list
         model.getDrawings().observe(this.getViewLifecycleOwner(), new Observer<List<Art>>() {
             @Override
             public void onChanged(List<Art> arts) {

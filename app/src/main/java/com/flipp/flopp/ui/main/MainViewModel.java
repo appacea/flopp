@@ -9,8 +9,6 @@
 
 package com.flipp.flopp.ui.main;
 
-import android.content.Context;
-
 import com.flipp.flopp.common.architecture.Resource;
 import com.flipp.flopp.common.architecture.Status;
 import com.flipp.flopp.data.art.local.Art;
@@ -21,19 +19,20 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+
+//This viewmodel will be used for the MainActivity
 public class MainViewModel extends ViewModel {
 
-    private ArtRepository artRepo ;
-    private UserRepository userRepo ;
-    private LiveData<Resource<List<Art>>> allArt;
+    private ArtRepository artRepo ; //Art repository
+    private UserRepository userRepo ; //User repository
+    private LiveData<Resource<List<Art>>> allArt; //All art
 
-
+    //Stores data for each page
     private LiveData<List<Art>> paintings ;
     private LiveData<List<Art>> sculptures ;
     private LiveData<List<Art>> drawings ;
@@ -46,19 +45,15 @@ public class MainViewModel extends ViewModel {
 
     final MutableLiveData<String> city; //Location
 
-    private LiveData<List<Art>> filteredArt  = Transformations.switchMap(modelFilter,
-            new Function<String, LiveData<List<Art>>>() {
-        @Override
-        public LiveData<List<Art>> apply(String category) {
-            return artRepo.getArt(category);
-        }
-    });
 
     @Inject
     public MainViewModel(ArtRepository artRepository, UserRepository userRepository){
-        this.city = new MutableLiveData<>();
+
+        city = new MutableLiveData<>(); //current city
         artRepo = artRepository;
         userRepo = userRepository;
+
+        //If city changes update all art
         allArt = Transformations.switchMap(city, input -> {
             if (input.isEmpty()) {
                 return new LiveData() {
@@ -70,7 +65,9 @@ public class MainViewModel extends ViewModel {
             }
             return artRepo.loadArt(city.getValue());
         });
-//        //TODO: change paintings to update when allArt updates
+
+        //For each category update the lists if all art changes.
+
         paintings = Transformations.switchMap(allArt, input -> {
             int i = 0;
             if(input.status == Status.SUCCESS && !input.data.isEmpty()) {
@@ -127,7 +124,7 @@ public class MainViewModel extends ViewModel {
         });
     }
 
-
+    //Getters for observable data
     public LiveData<List<Art>> getSculptures() {
         return sculptures;
     }
@@ -143,35 +140,23 @@ public class MainViewModel extends ViewModel {
     public LiveData<List<Art>> getDesigns() {
         return designs;
     }
-
-
     public LiveData<Resource<List<Art>>> getAllArt() {
         return allArt;
     }
 
-
-    public LiveData<List<Art>> getFilteredArt() {
-        return filteredArt;
-    }
-
-    public void filterModel(String category) {
-        modelFilter.postValue(category);
-    }
-
-
+    //Get and Set the city
     public String getCity(){
         return userRepo.getCity();
     }
-
     public void setCity(String city){
         this.city.setValue(city);
         userRepo.setCity(city);
     }
 
+    //Get and Set the favorites
     public LiveData<List<Art>> getFavorites(){
         return this.artRepo.getFavorites();
     }
-
     public void setFavorite(String id, boolean isFavorite){
         this.artRepo.setFavorite(id,isFavorite);
     }

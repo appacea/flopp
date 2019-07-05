@@ -10,6 +10,8 @@
 package com.flipp.flopp.di;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.flipp.flopp.common.architecture.AppExecutors;
 import com.flipp.flopp.data.art.local.ArtDatabase;
@@ -26,6 +28,13 @@ import dagger.Provides;
 
 @Module
 public class RepoModule {
+
+    @Singleton
+    @Provides
+    static SharedPreferences providePrefs(Application application) {
+        String KEY = "com.flipp.flopp.user";
+        return application.getSharedPreferences(KEY, Context.MODE_PRIVATE);
+    }
 
     @Singleton
     @Provides
@@ -49,7 +58,7 @@ public class RepoModule {
 
     @Singleton
     @Provides
-    static SessionStorage provideSessionStorage(Application application) {
-        return new SessionStorage(application);
+    static SessionStorage provideSessionStorage(SharedPreferences prefs) {
+        return new SessionStorage(prefs);
     }
 }

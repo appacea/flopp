@@ -2,12 +2,12 @@
  * Copyright (c) Tchipr Ltd 2019. All right reserved.
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * Created by Yvan Stern on 7/4/19 4:47 PM
+ * Created by Yvan Stern on 7/4/19 10:35 PM
  *
- * Last modified 7/4/19 4:47 PM
+ * Last modified 7/4/19 4:48 PM
  */
 
-package com.flipp.flopp;
+package com.flipp.flopp.util;
 
 import com.flipp.flopp.common.architecture.ApiResponse;
 

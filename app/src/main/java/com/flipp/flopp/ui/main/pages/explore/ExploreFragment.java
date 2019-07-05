@@ -69,18 +69,18 @@ public class ExploreFragment extends Fragment {
 
         model = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
 
+        //Observe changes in all art list
         model.getAllArt().observe(this, resource -> {
             if(resource.status == Status.LOADING) {
-                // displayLoader();
+               //TODO: PROGRESS VIEW
 
             } else if(!resource.data.isEmpty()) {
-                // updateMoviesList(resource.data);
                 artworks.clear();
                 artworks.addAll(resource.data);
                 adapter.notifyDataSetChanged();
 
             } else {
-                //handleErrorResponse();
+                //TODO: ERROR HANDLING
             }
         });
 

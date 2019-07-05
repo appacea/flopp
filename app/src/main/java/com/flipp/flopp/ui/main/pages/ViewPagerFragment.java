@@ -28,6 +28,10 @@ import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+/**
+ * Fragment that has embedded ViewPager
+ *
+ */
 public class ViewPagerFragment extends Fragment {
 
     private ViewPager viewPager;
@@ -51,19 +55,19 @@ public class ViewPagerFragment extends Fragment {
         pagerAdapter.addFragment(new DesignsFragment(),getString(R.string.tab_designs));
         viewPager.setAdapter(pagerAdapter);
 
+        //Create tabs programmatically so that they are not selected by default.
         TabLayout tabLayout = getActivity().findViewById(R.id.tlMain);
         for (int i = 0; i < pagerAdapter.getCount(); i++) {
             tabLayout.addTab(
                     tabLayout.newTab()
                             .setText(pagerAdapter.getPageTitle(i)),false);
         }
+
+        //Link Tablayout to viewpager
         tabLayout.setupWithViewPager(viewPager);
         return view;
     }
 
-    public void bindTabLayout(TabLayout tabLayout){
-      //  tabLayout.setupWithViewPager(viewPager);
-    }
 
     public void setPosition(int position){
         viewPager.setCurrentItem(position);

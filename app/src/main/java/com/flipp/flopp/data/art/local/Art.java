@@ -39,9 +39,40 @@ public class Art implements Parcelable {
     private int price;
     private boolean isFavorite = false;
     private String city;
+    private int untilDayOfWeek = new Random().nextInt(6)+1;
 
     @Embedded
     private ArtOwner owner;
+
+    public int getUntilDayOfWeek() {
+        return untilDayOfWeek;
+    }
+
+    public void setUntilDayOfWeek(int untilDayOfWeek) {
+        this.untilDayOfWeek = untilDayOfWeek;
+    }
+
+    public String getReadableUntil(){
+        switch(this.untilDayOfWeek){
+            case 1:
+                return "Monday";
+            case 2:
+                return "Tuesday";
+            case 3:
+                return "Wednesday";
+            case 4:
+                return "Thursday";
+            case 5:
+                return "Friday";
+            case 6:
+                return "Saturday";
+            case 7:
+                return "Sunday";
+            default:
+                return "Monday";
+        }
+    }
+
 
     public boolean isFavorite() {
         return isFavorite;
@@ -147,6 +178,10 @@ public class Art implements Parcelable {
         return this._links.image.getHref().replace("{image_version}","large");
     }
 
+    public String getThumbnailUrl(){
+        return this._links.thumbnail.getHref();
+    }
+
     public Art(){
         price =  new Random().nextInt(100000)+2000;
     }
@@ -168,6 +203,7 @@ public class Art implements Parcelable {
         price = in.readInt();
         isFavorite = in.readByte() != 0;
         city = in.readString();
+        untilDayOfWeek = in.readInt();
         owner = (ArtOwner) in.readValue(ArtOwner.class.getClassLoader());
     }
 
@@ -194,6 +230,7 @@ public class Art implements Parcelable {
         dest.writeInt(price);
         dest.writeByte((byte) (isFavorite ? 1 : 0));
         dest.writeString(city);
+        dest.writeInt(untilDayOfWeek);
         dest.writeValue(owner);
     }
 

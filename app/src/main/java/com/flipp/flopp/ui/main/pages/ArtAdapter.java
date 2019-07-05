@@ -21,20 +21,19 @@ import android.widget.TextView;
 import com.flipp.flopp.R;
 import com.flipp.flopp.data.art.local.Art;
 import com.flipp.flopp.tools.CircleTransform;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.time.DayOfWeek;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ArtAdapter extends RecyclerView.Adapter<ArtAdapter.ExploreViewHolder> {
 
-
     private List<Art> artworks;
-
-
-
-
     private final OnArtClickedListener listener;
 
     public static class ExploreViewHolder extends RecyclerView.ViewHolder {
@@ -44,6 +43,8 @@ public class ArtAdapter extends RecyclerView.Adapter<ArtAdapter.ExploreViewHolde
         public TextView tvPrice;
         public TextView tvTitle;
         public CheckBox cbFavorite;
+        public TextView tvUntil;
+
         public ExploreViewHolder(FrameLayout v) {
             super(v);
             flCard = v;
@@ -52,10 +53,25 @@ public class ArtAdapter extends RecyclerView.Adapter<ArtAdapter.ExploreViewHolde
             tvPrice = v.findViewById(R.id.tvPrice);
             tvTitle = v.findViewById(R.id.tvTitle);
             cbFavorite = v.findViewById(R.id.cbFavorite);
+            tvUntil = v.findViewById(R.id.tvUntil);
         }
 
+        //Bind data to viewholder
         public void bind(final Art art, final OnArtClickedListener listener) {
-            Picasso.get().load(art.getLargeImageUrl()).into(this.ivMain);
+            //Load thumbnail then large image
+            Picasso.get()
+                    .load(art.getThumbnailUrl()) // thumbnail url goes here
+                    .into(this.ivMain, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            Picasso.get().load(art.getLargeImageUrl()).into(ExploreViewHolder.this.ivMain);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    });
             Picasso.get().load(art.getOwner().getThumbnail()).transform(new CircleTransform()).into(this.ivOwner);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
@@ -74,6 +90,7 @@ public class ArtAdapter extends RecyclerView.Adapter<ArtAdapter.ExploreViewHolde
 
                 }
             });
+            this.tvUntil.setText("until "+art.getReadableUntil());
         }
     }
 

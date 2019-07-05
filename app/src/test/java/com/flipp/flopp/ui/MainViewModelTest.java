@@ -2,15 +2,16 @@
  * Copyright (c) Tchipr Ltd 2019. All right reserved.
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * Created by Yvan Stern on 7/4/19 1:41 PM
+ * Created by Yvan Stern on 7/4/19 10:36 PM
  *
- * Last modified 7/4/19 1:41 PM
+ * Last modified 7/4/19 10:35 PM
  */
 
-package com.flipp.flopp;
+package com.flipp.flopp.ui;
 
 
 import com.flipp.flopp.data.art.repository.ArtRepository;
+import com.flipp.flopp.data.user.repository.UserRepository;
 import com.flipp.flopp.ui.main.MainViewModel;
 
 import org.junit.Before;
@@ -19,6 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;;
@@ -41,24 +43,26 @@ public class MainViewModelTest {
 
     @Mock
     ArtRepository artRepository;
+    @Mock
+    UserRepository userRepository;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        viewModel = new MainViewModel(artRepository);
+        viewModel = new MainViewModel(artRepository,userRepository);
     }
 
 
     @Test
     public void testNull() {
         assertThat(viewModel.getAllArt(), notNullValue());
-        verify(artRepository, never()).loadArt();
+        verify(artRepository, never()).loadArt(Mockito.anyString());
     }
 
     @Test
     public  void fetchWhenObserved() {
         viewModel.getAllArt().observeForever(mock(Observer.class));
-        verify(artRepository, times(1)).loadArt();
+        verify(artRepository, times(1)).loadArt(Mockito.anyString());
     }
 
 
