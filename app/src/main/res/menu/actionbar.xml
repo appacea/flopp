@@ -16,11 +16,6 @@
         android:icon="@drawable/ic_baseline_person_24px">
     </item>
     <item
-        android:id="@+id/miAnywhere"
-        app:showAsAction="never"
-        android:title="Anywhere">
-    </item>
-    <item
         android:id="@+id/miMontreal"
         app:showAsAction="never"
         android:title="Montreal">

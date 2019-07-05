@@ -18,6 +18,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
+/**
+ * A ViewPager that allows for child ViewPager
+ */
 public class ParentViewPager extends ViewPager {
     public ParentViewPager(@NonNull Context context) {
         super(context);
@@ -29,13 +32,6 @@ public class ParentViewPager extends ViewPager {
         this.enabled = true;
     }
 
-//    @Override
-//    protected boolean canScroll(View v, boolean checkV, int dx, int x, int y) {
-//        if(v != this && v instanceof ViewPager) {
-//            return true;
-//        }
-//        return super.canScroll(v, checkV, dx, x, y);
-//    }
     @Override
     protected boolean canScroll(View v, boolean checkV, int dx, int x, int y) {
         if(v != this && v instanceof ViewPager) {
@@ -48,26 +44,6 @@ public class ParentViewPager extends ViewPager {
         }
         return super.canScroll(v, checkV, dx, x, y);
     }
-
-
-//    private int childId;
-//    @Override
-//    public boolean onInterceptTouchEvent(MotionEvent event) {
-//        if (childId > 0) {
-//            ViewPager pager = (ViewPager)findViewById(childId);
-//
-//            if (pager != null) {
-//                pager.requestDisallowInterceptTouchEvent(true);
-//            }
-//
-//        }
-//
-//        return super.onInterceptTouchEvent(event);
-//    }
-//
-//    public void setChildId(int id) {
-//        this.childId = id;
-//    }
 
     private boolean enabled;
 

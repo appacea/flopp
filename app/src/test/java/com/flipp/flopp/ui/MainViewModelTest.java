@@ -47,11 +47,10 @@ public class MainViewModelTest {
     UserRepository userRepository;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp()  {
         MockitoAnnotations.initMocks(this);
         viewModel = new MainViewModel(artRepository,userRepository);
     }
-
 
     @Test
     public void testNull() {
@@ -60,10 +59,38 @@ public class MainViewModelTest {
     }
 
     @Test
-    public  void fetchWhenObserved() {
+    public void fetchWhenObserved() {
+        viewModel.setCity("Montreal");
         viewModel.getAllArt().observeForever(mock(Observer.class));
         verify(artRepository, times(1)).loadArt(Mockito.anyString());
     }
 
 
+    @Test
+    public void changeWhileObserved() {
+        viewModel.getAllArt().observeForever(mock(Observer.class));
+        viewModel.setCity("Montreal");
+        verify(artRepository, times(1)).loadArt(Mockito.anyString());
+
+    }
+
+
+    @Test
+    public void getCity() {}
+
+
+    @Test
+    public void setCity() {}
+
+
+    @Test
+    public void setBlankCity() {}
+
+
+    @Test
+    public void getFavorites() {}
+
+
+    @Test
+    public void setFavorites() {}
 }

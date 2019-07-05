@@ -81,13 +81,10 @@ public class ArtAdapter extends RecyclerView.Adapter<ArtAdapter.ExploreViewHolde
             this.tvPrice.setText(art.getReadablePrice());
             this.tvTitle.setText(art.getTitle());
             this.cbFavorite.setChecked(art.isFavorite());
-            this.cbFavorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-            {
+            this.cbFavorite.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-                {
-                    listener.onArtFavorite(art,isChecked);
-
+                public void onClick(View view) {
+                    listener.onArtFavorite(art,((CompoundButton) view).isChecked());
                 }
             });
             this.tvUntil.setText("until "+art.getReadableUntil());

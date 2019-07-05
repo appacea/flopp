@@ -32,7 +32,7 @@ public interface ArtDao {
     @Query("SELECT * FROM `Art` WHERE category =:category")
     LiveData<List<Art>> getArt(String category);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertArtworks(List<Art> art);
 
     @Query("SELECT * FROM `Art`")

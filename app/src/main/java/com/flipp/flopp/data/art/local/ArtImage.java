@@ -25,7 +25,7 @@ public class ArtImage implements Parcelable {
     }
 
     public ArtImage(){
-
+            href = "";
     }
 
     protected ArtImage(Parcel in) {

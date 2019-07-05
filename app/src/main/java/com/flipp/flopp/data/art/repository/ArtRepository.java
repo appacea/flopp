@@ -54,7 +54,6 @@ public class ArtRepository {
 
             @Override
             protected void saveCallResult(@NonNull ArtsyResponse responseArtwork, @NonNull RandomMeResponse responseUsers) {
-                artDao.deleteAll();
                 List<Art> artwork = responseArtwork.get_embedded().getArtworks();
                 Random rand = new Random();
                 for(Art art: artwork){
@@ -90,9 +89,6 @@ public class ArtRepository {
                     case "Montreal":
                         partner_id = "56f94caf139b21737200320b";
                         break;
-                    case "Anywhere":
-                        partner_id = null;
-                        break;
                     case "Toronto":
                         partner_id = "5554bf037261697700010000";
                         break;
@@ -100,7 +96,7 @@ public class ArtRepository {
                         partner_id = "547cbaf47261692d5e2f0200";
                         break;
                     default:
-                        partner_id = null;
+                        partner_id = "56f94caf139b21737200320b";
 
                 }
                 return artsyService.getArt(partner_id);

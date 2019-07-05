@@ -13,8 +13,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class ArtLinks implements Parcelable {
-    public ArtImage thumbnail;
-    public ArtImage image;
+    public ArtImage thumbnail = new ArtImage();
+    public ArtImage image= new ArtImage();
 
 
     public ArtLinks(){}

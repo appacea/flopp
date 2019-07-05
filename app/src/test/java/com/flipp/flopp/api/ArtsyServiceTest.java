@@ -9,5 +9,27 @@
 
 package com.flipp.flopp.api;
 
+import org.junit.Before;
+import org.junit.Test;
+
 public class ArtsyServiceTest {
+
+    // ArstyService service;
+    // MockWebServer mockWebServer;
+
+    @Before
+    public void createService() {
+        /*
+        mockWebServer = MockWebServer()
+        service = Retrofit.Builder()...
+        */
+    }
+
+
+    @Test
+    public void getAllArt() {
+
+    }
+
+
 }
