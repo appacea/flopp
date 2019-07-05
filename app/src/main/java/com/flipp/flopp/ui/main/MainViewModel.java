@@ -9,12 +9,13 @@
 
 package com.flipp.flopp.ui.main;
 
+import android.content.Context;
+
 import com.flipp.flopp.common.architecture.Resource;
+import com.flipp.flopp.common.architecture.Status;
 import com.flipp.flopp.data.art.local.Art;
-import com.flipp.flopp.data.art.local.ArtDatabase;
-import com.flipp.flopp.data.art.network.ArtsyService;
-import com.flipp.flopp.data.art.network.RandomMeService;
 import com.flipp.flopp.data.art.repository.ArtRepository;
+import com.flipp.flopp.data.user.repository.UserRepository;
 
 import java.util.List;
 
@@ -28,41 +29,103 @@ import androidx.lifecycle.ViewModel;
 
 public class MainViewModel extends ViewModel {
 
-    private ArtRepository repo ;
+    private ArtRepository artRepo ;
+    private UserRepository userRepo ;
     private LiveData<Resource<List<Art>>> allArt;
 
 
-    private LiveData<List<Art>> paintings;
-    private LiveData<List<Art>> sculptures;
-    private LiveData<List<Art>> drawings;
-    private LiveData<List<Art>> photographs;
-    private LiveData<List<Art>> designs;
+    private LiveData<List<Art>> paintings ;
+    private LiveData<List<Art>> sculptures ;
+    private LiveData<List<Art>> drawings ;
+    private LiveData<List<Art>> photographs ;
+    private LiveData<List<Art>> designs ;
 
 
     MutableLiveData<String> modelFilter = new MutableLiveData<>();
 
 
+    final MutableLiveData<String> city; //Location
 
     private LiveData<List<Art>> filteredArt  = Transformations.switchMap(modelFilter,
             new Function<String, LiveData<List<Art>>>() {
         @Override
         public LiveData<List<Art>> apply(String category) {
-            return repo.getArt(category);
+            return artRepo.getArt(category);
         }
     });
 
     @Inject
-    public MainViewModel(ArtDatabase artDatabase, ArtsyService artsyService, RandomMeService randomMeService){
-        repo = new ArtRepository(artDatabase.artDao(),artsyService,randomMeService);
-        allArt = repo.loadArt();
-        //TODO: change paintings to update when allArt updates
-        paintings = repo.getArt("Painting");
-        sculptures = repo.getArt("Sculpture");
-        drawings = repo.getArt("Drawing, Collage or other Work on Paper");
-        photographs = repo.getArt("Photography");
-        designs = repo.getArt("Design/Decorative Art");
-    }
+    public MainViewModel(ArtRepository artRepository, UserRepository userRepository){
+        this.city = new MutableLiveData<>();
+        artRepo = artRepository;
+        userRepo = userRepository;
+        allArt = Transformations.switchMap(city, input -> {
+            if (input.isEmpty()) {
+                return new LiveData() {
+                    @Override
+                    protected void postValue(Object value) {
+                        super.postValue(null);
+                    }
+                };
+            }
+            return artRepo.loadArt(city.getValue());
+        });
+//        //TODO: change paintings to update when allArt updates
+        paintings = Transformations.switchMap(allArt, input -> {
+            int i = 0;
+            if(input.status == Status.SUCCESS && !input.data.isEmpty()) {
+                return artRepo.getArt("Painting");
+            } else return new LiveData() {
+                @Override
+                protected void postValue(Object value) {
+                    super.postValue(null);
+                }
+            };
+        });
+        sculptures= Transformations.switchMap(allArt, input -> {
+            if(input.status == Status.SUCCESS && !input.data.isEmpty()) {
+                return artRepo.getArt("Sculpture");
+            } else return new LiveData() {
+                @Override
+                protected void postValue(Object value) {
+                    super.postValue(null);
+                }
+            };
+        });
 
+        drawings= Transformations.switchMap(allArt, input -> {
+            if(input.status == Status.SUCCESS && !input.data.isEmpty()) {
+                return artRepo.getArt("Drawing, Collage or other Work on Paper");
+            } else return new LiveData() {
+                @Override
+                protected void postValue(Object value) {
+                    super.postValue(null);
+                }
+            };
+        });
+
+        photographs= Transformations.switchMap(allArt, input -> {
+            if(input.status == Status.SUCCESS && !input.data.isEmpty()) {
+                return artRepo.getArt("Photography");
+            } else return new LiveData() {
+                @Override
+                protected void postValue(Object value) {
+                    super.postValue(null);
+                }
+            };
+        });
+
+        designs= Transformations.switchMap(allArt, input -> {
+            if(input.status == Status.SUCCESS && !input.data.isEmpty()) {
+                return artRepo.getArt("Design/Decorative Art");
+            } else return new LiveData() {
+                @Override
+                protected void postValue(Object value) {
+                    super.postValue(null);
+                }
+            };
+        });
+    }
 
 
     public LiveData<List<Art>> getSculptures() {
@@ -93,6 +156,24 @@ public class MainViewModel extends ViewModel {
 
     public void filterModel(String category) {
         modelFilter.postValue(category);
+    }
+
+
+    public String getCity(){
+        return userRepo.getCity();
+    }
+
+    public void setCity(String city){
+        this.city.setValue(city);
+        userRepo.setCity(city);
+    }
+
+    public LiveData<List<Art>> getFavorites(){
+        return this.artRepo.getFavorites();
+    }
+
+    public void setFavorite(String id, boolean isFavorite){
+        this.artRepo.setFavorite(id,isFavorite);
     }
 
     @Override

@@ -10,6 +10,9 @@
 package com.flipp.flopp.data.art.network;
 
 
+import com.flipp.flopp.common.architecture.ApiResponse;
+
+import androidx.lifecycle.LiveData;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -23,6 +26,6 @@ public interface ArtsyService {
     Call<ArtsyToken> getToken(@Body ArtsyToken token);
 
     @GET("api/artworks?size=100")
-    Call<ArtsyResponse> getArt();
+    LiveData<ApiResponse<ArtsyResponse>> getArt(@Query("partner_id") String partnerId);
 
 }

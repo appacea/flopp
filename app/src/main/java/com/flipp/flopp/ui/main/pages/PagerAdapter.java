@@ -10,9 +10,6 @@
 package com.flipp.flopp.ui.main.pages;
 
 
-import android.content.Context;
-
-import com.flipp.flopp.R;
 
 import java.util.ArrayList;
 import java.util.List;

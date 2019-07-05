@@ -12,6 +12,7 @@ package com.flipp.flopp.di;
 
 import android.app.Application;
 
+import com.flipp.flopp.common.architecture.LiveDataCallAdapterFactory;
 import com.flipp.flopp.data.art.network.ArtsyService;
 import com.flipp.flopp.data.art.network.ArtsyServiceHolder;
 import com.flipp.flopp.data.art.network.RandomMeService;
@@ -87,6 +88,7 @@ public class NetworkModule {
     static Retrofit provideArtsyRetrofit(Gson gson, OkHttpClient okHttpClient) {
         return new Retrofit.Builder().baseUrl(ARTSY_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(new LiveDataCallAdapterFactory())
                 .client(okHttpClient)
                 .build();
     }
@@ -98,6 +100,7 @@ public class NetworkModule {
     static Retrofit provideRandomeMeRetrofit(Gson gson, OkHttpClient okHttpClient) {
         return new Retrofit.Builder().baseUrl(RANDOMME_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(new LiveDataCallAdapterFactory())
                 .client(okHttpClient)
                 .build();
     }

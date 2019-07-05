@@ -34,7 +34,7 @@ public class ArtsyResponse {
         this._embedded = _embedded;
     }
 
-    public class ArtsyEmbedded{
+    public static class ArtsyEmbedded{
 
         private List<Art> artworks;
 

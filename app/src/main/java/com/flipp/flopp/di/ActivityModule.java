@@ -9,6 +9,7 @@
 
 package com.flipp.flopp.di;
 
+import com.flipp.flopp.ui.main.DetailActivity;
 import com.flipp.flopp.ui.main.MainActivity;
 
 import dagger.Module;
@@ -19,4 +20,6 @@ public abstract class ActivityModule {
 
     @ContributesAndroidInjector()
     abstract MainActivity contributeMainActivity();
+    @ContributesAndroidInjector()
+    abstract DetailActivity contributeDetailActivity();
 }

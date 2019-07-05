@@ -43,4 +43,17 @@ public interface ArtDao {
     void deleteAll();
 
 
+    @Query("SELECT * FROM `Art` WHERE category =:category AND city =:city")
+    LiveData<List<Art>> getArt(String category, String city);
+
+
+    @Query("SELECT * FROM `Art` WHERE city =:city")
+    LiveData<List<Art>> selectAllByCity(String city);
+
+    @Query("UPDATE `Art` SET isFavorite=:isFavorite WHERE id = :id")
+    void setFavorite(String id, boolean isFavorite);
+
+
+    @Query("SELECT * FROM `Art` WHERE isFavorite=1")
+    LiveData<List<Art>> getFavorites();
 }

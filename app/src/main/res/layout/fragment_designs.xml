@@ -3,9 +3,9 @@
   ~ Copyright (c) Tchipr Ltd 2019. All right reserved.
   ~ Unauthorized copying of this file, via any medium is strictly prohibited
   ~ Proprietary and confidential
-  ~ Created by Yvan Stern on 7/2/19 10:58 PM
+  ~ Created by Yvan Stern on 7/4/19 7:41 PM
   ~
-  ~ Last modified 7/2/19 2:11 PM
+  ~ Last modified 7/4/19 7:41 PM
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,7 +14,7 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSculptures"
+        android:id="@+id/rvDesigns"
         android:paddingTop="22dp"
         android:clipToPadding="false"
         android:layout_width="match_parent"

@@ -18,20 +18,27 @@ public class RandomMeResponse {
         return results;
     }
 
-    public class User{
-        public Picture picture;
-        public Name name;
+    public void setResults(List<User> results) {
+        this.results = results;
     }
 
-    public class Picture{
+    public static class User{
+        public Picture picture;
+        public Name name;
+
+
+    }
+
+    public static class Picture{
         public String thumbnail;
     }
 
-    public class Name{
-        private String first;
-        private String last;
+    public static class Name{
+        public String first;
+        public String last;
         public String getName(){
             return first+" "+last;
         }
+
     }
 }

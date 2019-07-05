@@ -10,7 +10,12 @@
 package com.flipp.flopp.data.art.local;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import androidx.annotation.NonNull;
 import androidx.room.Embedded;
@@ -18,24 +23,60 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Art {
+public class Art implements Parcelable {
 
 
     @PrimaryKey
     @NonNull
     private String id;
-
+    private String title;
     private String category;
     private String medium;
     private String date;
     private String collecting_institution;
     private List<String> image_versions;
     private ArtLinks _links;
+    private int price;
+    private boolean isFavorite = false;
+    private String city;
 
     @Embedded
     private ArtOwner owner;
 
+    public boolean isFavorite() {
+        return isFavorite;
+    }
 
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getReadablePrice(){
+        return "$"+getPrice() + "/mth";
+    }
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getPrice() {
+        return price ;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
     public String getId() {
         return id;
@@ -103,16 +144,73 @@ public class Art {
     }
 
     public String getLargeImageUrl(){
-        return this._links.image.href.replace("{image_version}","large");
+        return this._links.image.getHref().replace("{image_version}","large");
     }
 
-    public class ArtLinks{
-        public ArtImage thumbnail;
-        public ArtImage image;
-
+    public Art(){
+        price =  new Random().nextInt(100000)+2000;
     }
 
-    public class ArtImage{
-        public String href;
+    protected Art(Parcel in) {
+        id = in.readString();
+        title = in.readString();
+        category = in.readString();
+        medium = in.readString();
+        date = in.readString();
+        collecting_institution = in.readString();
+        if (in.readByte() == 0x01) {
+            image_versions = new ArrayList<String>();
+            in.readList(image_versions, String.class.getClassLoader());
+        } else {
+            image_versions = null;
+        }
+        _links = (ArtLinks) in.readValue(ArtLinks.class.getClassLoader());
+        price = in.readInt();
+        isFavorite = in.readByte() != 0;
+        city = in.readString();
+        owner = (ArtOwner) in.readValue(ArtOwner.class.getClassLoader());
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(title);
+        dest.writeString(category);
+        dest.writeString(medium);
+        dest.writeString(date);
+        dest.writeString(collecting_institution);
+        if (image_versions == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(image_versions);
+        }
+        dest.writeValue(_links);
+        dest.writeInt(price);
+        dest.writeByte((byte) (isFavorite ? 1 : 0));
+        dest.writeString(city);
+        dest.writeValue(owner);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Art> CREATOR = new Parcelable.Creator<Art>() {
+        @Override
+        public Art createFromParcel(Parcel in) {
+            return new Art(in);
+        }
+
+        @Override
+        public Art[] newArray(int size) {
+            return new Art[size];
+        }
+    };
+
+
+
+
 }

@@ -9,6 +9,7 @@
 
 package com.flipp.flopp.ui.main.pages.photographs;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.flipp.flopp.R;
 import com.flipp.flopp.data.art.local.Art;
+import com.flipp.flopp.ui.main.DetailActivity;
 import com.flipp.flopp.ui.main.MainViewModel;
 import com.flipp.flopp.ui.main.pages.ArtAdapter;
 
@@ -35,33 +37,36 @@ public class PhotographsFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
 
     private List<Art> artworks = new ArrayList<>();
+    private MainViewModel model;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
-        View view = inflater.inflate(R.layout.fragment_paintings, container, false);
+        View view = inflater.inflate(R.layout.fragment_photographs, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.rvPaintings);
+        recyclerView = (RecyclerView) view.findViewById(R.id.rvPhotographs);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new ArtAdapter(artworks);
+        adapter = new ArtAdapter(artworks, new ArtAdapter.OnArtClickedListener() {
+            @Override
+            public void onArtClicked(Art art) {
+                Intent detailActivity = new Intent(getActivity(), DetailActivity.class);
+                detailActivity.putExtra("Art", art);
+                getActivity().startActivity(detailActivity);
+            }
+
+            @Override
+            public void onArtFavorite(Art art, boolean isFavorite) {
+                model.setFavorite(art.getId(),isFavorite);
+            }
+        });
         recyclerView.setAdapter(adapter);
 
 
-        MainViewModel model = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
-
-
-//        model.getFilteredArt().observe(this.getViewLifecycleOwner(), new Observer<List<Art>>() {
-//            @Override
-//            public void onChanged(List<Art> arts) {
-//                artworks.clear();
-//                artworks.addAll(arts);
-//                adapter.notifyDataSetChanged();
-//            }
-//        });
+        model = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
 
         model.getPhotographs().observe(this.getViewLifecycleOwner(), new Observer<List<Art>>() {
             @Override
@@ -71,8 +76,6 @@ public class PhotographsFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
-
-        //model.filterModel("Painting");
 
 
         return view;

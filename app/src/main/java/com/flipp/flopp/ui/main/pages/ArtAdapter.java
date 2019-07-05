@@ -10,9 +10,13 @@
 package com.flipp.flopp.ui.main.pages;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.flipp.flopp.R;
 import com.flipp.flopp.data.art.local.Art;
@@ -24,22 +28,58 @@ import java.util.List;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ArtAdapter extends RecyclerView.Adapter<ArtAdapter.ExploreViewHolder> {
+
+
     private List<Art> artworks;
+
+
+
+
+    private final OnArtClickedListener listener;
 
     public static class ExploreViewHolder extends RecyclerView.ViewHolder {
         public FrameLayout flCard;
         public ImageView ivMain;
         public ImageView ivOwner;
+        public TextView tvPrice;
+        public TextView tvTitle;
+        public CheckBox cbFavorite;
         public ExploreViewHolder(FrameLayout v) {
             super(v);
             flCard = v;
             ivMain = v.findViewById(R.id.ivMain);
             ivOwner = v.findViewById(R.id.ivOwner);
+            tvPrice = v.findViewById(R.id.tvPrice);
+            tvTitle = v.findViewById(R.id.tvTitle);
+            cbFavorite = v.findViewById(R.id.cbFavorite);
+        }
+
+        public void bind(final Art art, final OnArtClickedListener listener) {
+            Picasso.get().load(art.getLargeImageUrl()).into(this.ivMain);
+            Picasso.get().load(art.getOwner().getThumbnail()).transform(new CircleTransform()).into(this.ivOwner);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    listener.onArtClicked(art);
+                }
+            });
+            this.tvPrice.setText(art.getReadablePrice());
+            this.tvTitle.setText(art.getTitle());
+            this.cbFavorite.setChecked(art.isFavorite());
+            this.cbFavorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+            {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+                {
+                    listener.onArtFavorite(art,isChecked);
+
+                }
+            });
         }
     }
 
-    public ArtAdapter(List<Art> artworks) {
+    public ArtAdapter(List<Art> artworks, OnArtClickedListener listener) {
         this.artworks = artworks;
+        this.listener = listener;
     }
 
     @Override
@@ -55,15 +95,17 @@ public class ArtAdapter extends RecyclerView.Adapter<ArtAdapter.ExploreViewHolde
 
     @Override
     public void onBindViewHolder(ExploreViewHolder holder, int position) {
-
-        Art art = this.artworks.get(position);
-        //holder.textView.setText(art.getCategory());
-        Picasso.get().load(art.getLargeImageUrl()).into(holder.ivMain);
-        Picasso.get().load(art.getOwner().getThumbnail()).transform(new CircleTransform()).into(holder.ivOwner);
+            holder.bind(artworks.get(position),listener);
     }
 
     @Override
     public int getItemCount() {
         return this.artworks.size();
+    }
+
+
+    public interface OnArtClickedListener {
+        void onArtClicked(Art art);
+        void onArtFavorite(Art art, boolean isFavorite);
     }
 }

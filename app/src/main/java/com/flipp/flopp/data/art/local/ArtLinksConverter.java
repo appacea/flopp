@@ -19,13 +19,13 @@ import androidx.room.TypeConverter;
 public class ArtLinksConverter {
 
     @TypeConverter
-    public static Art.ArtLinks fromString(String artLinks) {
-        Type listType = new TypeToken<Art.ArtLinks>() {}.getType();
+    public static ArtLinks fromString(String artLinks) {
+        Type listType = new TypeToken<ArtLinks>() {}.getType();
         return new Gson().fromJson(artLinks, listType);
     }
 
     @TypeConverter
-    public static String fromArtLinks(Art.ArtLinks artLinks) {
+    public static String fromArtLinks(ArtLinks artLinks) {
         Gson gson = new Gson();
         String json = gson.toJson(artLinks);
         return json;

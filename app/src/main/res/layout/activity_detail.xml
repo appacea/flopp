@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) Tchipr Ltd 2019. All right reserved.
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Created by Yvan Stern on 7/4/19 11:36 AM
+  ~
+  ~ Last modified 7/4/19 11:36 AM
+  -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/ivArt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:scaleType="fitCenter" />
+
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textColor="@color/colorAccent" />
+
+
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textColor="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tvMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textColor="@color/colorAccent" />
+
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textColor="@color/colorAccent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            app:backgroundTint="@color/colorPrimaryDark"
+            android:layout_margin="20dp"
+            android:text="Rent" />
+    </LinearLayout>
+</FrameLayout>

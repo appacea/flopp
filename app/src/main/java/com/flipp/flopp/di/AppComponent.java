@@ -23,6 +23,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Component(modules = {
         NetworkModule.class,
         DatabaseModule.class,
+        RepoModule.class,
         ViewModelModule.class,
         ActivityModule.class,
         AndroidSupportInjectionModule.class})

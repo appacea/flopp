@@ -21,6 +21,7 @@
         android:layout_width="match_parent"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -36,6 +37,21 @@
             android:layout_height="wrap_content">
 
 
+            <ImageView
+                android:id="@+id/ivFavorite"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:tint="@color/colorAccent"
+                app:srcCompat="@drawable/ic_baseline_favorite_border_24px" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="2dp"
+                android:background="@color/colorAccent"
+                android:layout_height="20dp"
+                android:layout_marginTop="15dp" />
+
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tlMain"
                 android:layout_width="match_parent"
@@ -44,34 +60,6 @@
                 app:tabPaddingStart="10dp"
                 app:tabPaddingEnd="10dp">
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/ic_baseline_favorite_border_24px"/>
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Painting" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sculpture" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Drawing" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Photography" />
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Decorative" />
             </com.google.android.material.tabs.TabLayout>
 
         </LinearLayout>
@@ -79,15 +67,28 @@
 
 
 
+        <View
+            android:id="@+id/vIndicator"
+            android:layout_width="80dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="-2dp"
+            android:background="@color/colorAccent" />
+
+        <View
+            android:id="@+id/vIndicatorAnimate"
+            android:layout_width="80dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="-2dp"
+            android:background="@color/colorAccent" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager.widget.ViewPager
+    <com.flipp.flopp.ui.main.ParentViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </androidx.viewpager.widget.ViewPager>
+    </com.flipp.flopp.ui.main.ParentViewPager>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"

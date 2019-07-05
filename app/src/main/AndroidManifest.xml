@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:hardwareAccelerated="true"
         android:name=".FloppApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,6 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.main.DetailActivity"></activity>
     </application>
 
 </manifest>

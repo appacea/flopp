@@ -10,6 +10,9 @@
 package com.flipp.flopp.data.art.network;
 
 
+import com.flipp.flopp.common.architecture.ApiResponse;
+
+import androidx.lifecycle.LiveData;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -20,6 +23,6 @@ public interface RandomMeService {
 
 
     @GET("api/?results=100")
-    Call<RandomMeResponse> getUsers();
+    LiveData<ApiResponse<RandomMeResponse>> getUsers();
 
 }

@@ -16,28 +16,23 @@
         android:icon="@drawable/ic_baseline_person_24px">
     </item>
     <item
-        android:id="@+id/miProfile"
+        android:id="@+id/miAnywhere"
         app:showAsAction="never"
-        android:title="Profile">
+        android:title="Anywhere">
     </item>
     <item
-        android:id="@+id/miProfile"
+        android:id="@+id/miMontreal"
         app:showAsAction="never"
-        android:title="Profile">
+        android:title="Montreal">
     </item>
     <item
-        android:id="@+id/miProfile"
+        android:id="@+id/miToronto"
         app:showAsAction="never"
-        android:title="Profile">
+        android:title="Toronto">
     </item>
     <item
-        android:id="@+id/miProfile"
+        android:id="@+id/miOttawa"
         app:showAsAction="never"
-        android:title="Profile">
-    </item>
-    <item
-        android:id="@+id/miProfile"
-        app:showAsAction="never"
-        android:title="Profile">
+        android:title="Ottawa">
     </item>
 </menu>

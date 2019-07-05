@@ -2,12 +2,12 @@
  * Copyright (c) Tchipr Ltd 2019. All right reserved.
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * Created by Yvan Stern on 7/2/19 10:57 PM
+ * Created by Yvan Stern on 7/4/19 9:02 PM
  *
- * Last modified 7/2/19 10:57 PM
+ * Last modified 7/3/19 8:34 PM
  */
 
-package com.flipp.flopp.ui.main.pages.sculptures;
+package com.flipp.flopp.ui.main.pages.favorites;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.flipp.flopp.R;
-import com.flipp.flopp.common.architecture.Status;
 import com.flipp.flopp.data.art.local.Art;
 import com.flipp.flopp.ui.main.DetailActivity;
 import com.flipp.flopp.ui.main.MainViewModel;
@@ -31,7 +30,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class SculpturesFragment extends Fragment {
+public class FavoritesFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -39,14 +38,15 @@ public class SculpturesFragment extends Fragment {
 
     private List<Art> artworks = new ArrayList<>();
     private MainViewModel model;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
-        View view = inflater.inflate(R.layout.fragment_sculptures, container, false);
+        View view = inflater.inflate(R.layout.fragment_favorites, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.rvSculptures);
+        recyclerView = (RecyclerView) view.findViewById(R.id.rvFavorites);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -68,8 +68,7 @@ public class SculpturesFragment extends Fragment {
 
         model = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
 
-
-        model.getSculptures().observe(this.getViewLifecycleOwner(), new Observer<List<Art>>() {
+        model.getFavorites().observe(this.getViewLifecycleOwner(), new Observer<List<Art>>() {
             @Override
             public void onChanged(List<Art> arts) {
                 artworks.clear();
@@ -77,12 +76,6 @@ public class SculpturesFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
-
-
         return view;
     }
-
-
-
-
 }
