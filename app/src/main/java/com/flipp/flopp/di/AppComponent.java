@@ -20,6 +20,11 @@ import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.support.AndroidSupportInjectionModule;
 
+/***
+ * Dagger Application configuration
+ *
+ * (adds all modules)
+ */
 @Component(modules = {
         NetworkModule.class,
         DatabaseModule.class,

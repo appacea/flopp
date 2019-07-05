@@ -20,6 +20,10 @@ import com.squareup.picasso.Picasso;
 import androidx.appcompat.app.AppCompatActivity;
 import dagger.android.AndroidInjection;
 
+
+/***
+ * Activity used to display Art detail
+ */
 public class DetailActivity extends AppCompatActivity {
 
     private Art art;
@@ -34,10 +38,9 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        //Get data from bundle (if Art instance is passed then display it)
         ImageView ivArt = findViewById(R.id.ivArt);
         Bundle extras = getIntent().getExtras();
-
-
         if (extras != null) {
             art = extras.getParcelable("Art");
             Picasso.get().load(art.getLargeImageUrl()).into(ivArt);

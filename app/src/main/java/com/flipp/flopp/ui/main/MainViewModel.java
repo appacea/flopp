@@ -24,8 +24,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-
-//This viewmodel will be used for the MainActivity
+/**
+ * This is the view model shared by all fragments that display artwork lists in the app
+ */
 public class MainViewModel extends ViewModel {
 
     private ArtRepository artRepo ; //Art repository
@@ -39,13 +40,14 @@ public class MainViewModel extends ViewModel {
     private LiveData<List<Art>> photographs ;
     private LiveData<List<Art>> designs ;
 
-
-    MutableLiveData<String> modelFilter = new MutableLiveData<>();
-
-
+    //Used to observe the current location
     final MutableLiveData<String> city; //Location
 
-
+    /**
+     * Create viewmodel with Art and User Repositories as inputs
+     * @param artRepository
+     * @param userRepository
+     */
     @Inject
     public MainViewModel(ArtRepository artRepository, UserRepository userRepository){
 
@@ -67,7 +69,6 @@ public class MainViewModel extends ViewModel {
         });
 
         //For each category update the lists if all art changes.
-
         paintings = Transformations.switchMap(allArt, input -> {
 
             if(input.status == Status.SUCCESS && !input.data.isEmpty()) {

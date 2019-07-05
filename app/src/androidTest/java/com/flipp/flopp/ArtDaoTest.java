@@ -42,6 +42,9 @@ public class ArtDaoTest {
     private ArtDao artDao;
     private ArtDatabase db;
 
+    /**
+     * Create the Database to test with
+     */
     @Before
     public void createDb() {
         Context context = InstrumentationRegistry.getTargetContext();
@@ -54,11 +57,19 @@ public class ArtDaoTest {
         artDao = db.artDao();
     }
 
+    /**
+     * Close the database when done.
+     */
     @After
     public void closeDb() {
         db.close();
     }
 
+    /**
+     * Test and insert and read
+     *
+     * @throws Exception
+     */
     @Test
     public void insertAndGetArt() throws Exception {
         Art art = new Art();
@@ -68,9 +79,13 @@ public class ArtDaoTest {
         assertEquals(allArt.get(0).getId(), art.getId());
     }
 
-
+    /***
+     * Test get all Artwork from database
+     *
+     * @throws Exception
+     */
     @Test
-    public void getAllWords() throws Exception {
+    public void getAllWork() throws Exception {
         Art art1 = new Art();
         art1.setId("1");
         artDao.insertArt(art1);
@@ -82,6 +97,10 @@ public class ArtDaoTest {
         assertEquals(allArt.get(1).getId(), art2.getId());
     }
 
+    /***
+     * Test delete all artwork from database
+     * @throws Exception
+     */
     @Test
     public void deleteAll() throws Exception {
         Art art1 = new Art();
@@ -94,4 +113,45 @@ public class ArtDaoTest {
         List<Art> allArt = LiveDataUtil.getValue(artDao.selectAll());
         assertTrue(allArt.isEmpty());
     }
+
+
+    /***
+     * Test select all by city
+     *
+     */
+    @Test
+    public void selectAllByCity(){
+        //TODO
+    }
+
+
+    /***
+     * Test select all by city is null
+     *
+     */
+    @Test
+    public void selectAllByCityNull(){
+        //TODO
+    }
+
+
+    /***
+     * Test select all by category and city
+     *
+     */
+    @Test
+    public void selectAllByCategoryCity(){
+        //TODO
+    }
+
+    /***
+     * Test select all by category and city both Null
+     *
+     */
+    @Test
+    public void selectAllByCategoryCityNull(){
+        //TODO
+    }
 }
+
+

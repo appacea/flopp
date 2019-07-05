@@ -20,6 +20,9 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/***
+ * Retrofit request interceptor used to add Artsy API Key
+ */
 public class RequestInterceptor implements Interceptor {
 
     private Context context;

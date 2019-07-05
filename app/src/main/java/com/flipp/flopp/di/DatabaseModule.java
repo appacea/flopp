@@ -20,6 +20,9 @@ import androidx.room.Room;
 import dagger.Module;
 import dagger.Provides;
 
+/**
+ * Module to generate database injectables
+ */
 @Module
 public class DatabaseModule {
 

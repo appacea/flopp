@@ -18,6 +18,9 @@ import java.util.List;
 import androidx.room.TypeConverter;
 
 
+/***
+ * Converter used by Room to convert a String list
+ */
 public class StringListConverter  {
     @TypeConverter
     public static List<String> fromString(String value) {

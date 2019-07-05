@@ -11,6 +11,9 @@ package com.flipp.flopp.data.user.local;
 
 import android.content.SharedPreferences;
 
+/***
+ * Handle session
+ */
 public class SessionStorage {
 
     static private String KEY_CITY = "com.flipp.flopp.user.city";
@@ -21,11 +24,19 @@ public class SessionStorage {
         this.prefs = prefs;
     }
 
+    /**
+     * Get the current city in session
+     * @return
+     */
     public String getCity(){
         String city = prefs.getString(KEY_CITY,DEFAULT_CITY);
         return city;
     }
 
+    /**
+     * Save a city into the session
+     * @param city
+     */
     public void saveCity(String city){
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(KEY_CITY, city);

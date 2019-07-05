@@ -12,6 +12,9 @@ package com.flipp.flopp.data.art.local;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * Class that defines an image for an artwork
+ */
 public class ArtImage implements Parcelable {
     private String href;
 

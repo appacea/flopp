@@ -11,6 +11,9 @@ package com.flipp.flopp.data.art.network;
 
 import java.util.List;
 
+/**
+ * Response from Random Me API
+ */
 public class RandomMeResponse {
     private List<User> results;
 

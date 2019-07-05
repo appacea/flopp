@@ -43,13 +43,20 @@ import javax.inject.Inject;
  */
 public class MainActivity extends AppCompatActivity {
 
+    //View Pager used in main activity, allows for embedded viewpager
     private ParentViewPager viewPager;
+    //Pager adapter used in viewpager
     private PagerAdapter pagerAdapter;
+    //Tablayout that is linked to the embedded viewpager in a fragment
     private TabLayout tlMain;
+    //Indicator to link favorites and tablayout
     private View vIndicator;
     private View vIndicatorAnimate;
+    //Imageview used to display favorites
     private ImageView ivFavorite;
+    //Fragment that embeds a viewpager
     private ViewPagerFragment viewPagerFragment;
+    //Progress dialog displayed during loading
     private ProgressDialog dialog;
 
     @Inject

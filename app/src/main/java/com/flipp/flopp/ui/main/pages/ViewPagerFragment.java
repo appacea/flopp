@@ -46,6 +46,8 @@ public class ViewPagerFragment extends Fragment {
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_viewpager, container, false);
         viewPager = view.findViewById(R.id.vpChild);
+
+        //Create PagerAdapter and add all fragments
         pagerAdapter = new PagerAdapter(getChildFragmentManager());
         pagerAdapter.addFragment(new ExploreFragment(),getString(R.string.tab_explore));
         pagerAdapter.addFragment(new PaintingsFragment(),getString(R.string.tab_paintings));

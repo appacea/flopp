@@ -19,6 +19,9 @@ import javax.inject.Singleton;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+/***
+ * ViewModel Factory used to get or create injectable viewmodel
+ */
 @Singleton
 public class ViewModelFactory implements ViewModelProvider.Factory {
 

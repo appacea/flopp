@@ -16,6 +16,9 @@ import java.lang.reflect.Type;
 
 import androidx.room.TypeConverter;
 
+/***
+ * Converter used by Room to convert ArtLinks
+ */
 public class ArtLinksConverter {
 
     @TypeConverter

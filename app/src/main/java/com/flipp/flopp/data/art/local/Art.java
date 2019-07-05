@@ -22,9 +22,12 @@ import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * Local entity for Artwork
+ *
+ */
 @Entity
 public class Art implements Parcelable {
-
 
     @PrimaryKey
     @NonNull
@@ -40,7 +43,6 @@ public class Art implements Parcelable {
     private boolean isFavorite = false;
     private String city;
     private int untilDayOfWeek = new Random().nextInt(6)+1;
-
     @Embedded
     private ArtOwner owner;
 

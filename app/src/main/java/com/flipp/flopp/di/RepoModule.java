@@ -25,10 +25,17 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-
+/**
+ * Module to generate repository injectables
+ */
 @Module
 public class RepoModule {
 
+    /**
+     * Generate share prefrences
+     * @param application
+     * @return
+     */
     @Singleton
     @Provides
     static SharedPreferences providePrefs(Application application) {
@@ -36,26 +43,46 @@ public class RepoModule {
         return application.getSharedPreferences(KEY, Context.MODE_PRIVATE);
     }
 
+    /**
+     * Generate executors
+     * @return
+     */
     @Singleton
     @Provides
     static AppExecutors provideExecutors() {
         return new AppExecutors();
     }
 
-
+    /***
+     * Generate Art Repository
+     * @param appExecutors
+     * @param artDatabase
+     * @param artsyService
+     * @param randomMeService
+     * @return
+     */
     @Singleton
     @Provides
     static ArtRepository provideArtRepo(AppExecutors appExecutors, ArtDatabase artDatabase, ArtsyService artsyService, RandomMeService randomMeService) {
         return new ArtRepository(appExecutors,artDatabase.artDao(),artsyService,randomMeService);
     }
 
-
+    /**
+     * Generate User Repository
+     * @param sessionStorage
+     * @return
+     */
     @Singleton
     @Provides
     static UserRepository provideUserRepo(SessionStorage sessionStorage) {
         return new UserRepository(sessionStorage);
     }
 
+    /**
+     * Generate session storage
+     * @param prefs
+     * @return
+     */
     @Singleton
     @Provides
     static SessionStorage provideSessionStorage(SharedPreferences prefs) {

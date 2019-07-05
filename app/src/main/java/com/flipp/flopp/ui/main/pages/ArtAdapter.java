@@ -31,11 +31,17 @@ import java.util.Locale;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+/***
+ * Adapter that displays a piece of Art
+ */
 public class ArtAdapter extends RecyclerView.Adapter<ArtAdapter.ExploreViewHolder> {
 
     private List<Art> artworks;
     private final OnArtClickedListener listener;
 
+    /**
+     * ViewHolder for Art Card
+     */
     public static class ExploreViewHolder extends RecyclerView.ViewHolder {
         public FrameLayout flCard;
         public ImageView ivMain;

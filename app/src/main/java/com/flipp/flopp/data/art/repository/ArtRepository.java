@@ -9,7 +9,6 @@
 
 package com.flipp.flopp.data.art.repository;
 
-import android.widget.Switch;
 
 import com.flipp.flopp.common.architecture.ApiResponse;
 import com.flipp.flopp.common.architecture.AppExecutors;
@@ -31,8 +30,10 @@ import javax.inject.Inject;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
-import retrofit2.Call;
 
+/***
+ * Repository for ARt data
+ */
 public class ArtRepository {
 
     private ArtDao artDao;
@@ -40,6 +41,13 @@ public class ArtRepository {
     private RandomMeService randomMeService;
     private AppExecutors appExecutors;
 
+    /***
+     * Create instance of Art repository
+     * @param appExecutors - executors to run networkboundresource
+     * @param artDao - the art DAO
+     * @param artsyService - artsy api used to generate dummy art data
+     * @param randomMeService - random me api used to generate dummy art owners
+     */
     @Inject
     public ArtRepository(AppExecutors appExecutors, ArtDao artDao, ArtsyService artsyService, RandomMeService randomMeService){
         this.artsyService = artsyService;
@@ -48,6 +56,13 @@ public class ArtRepository {
         this.appExecutors = appExecutors;
     }
 
+    /****
+     * Fetch artwork from API and store it locally
+     *
+     * Here we just fetch each time art is requested, in the future would want to have a better mechanism for determining when to fetch.
+     * @param city
+     * @return
+     */
     public LiveData<Resource<List<Art>>> loadArt(final String city) {
         return new NetworkBoundResource<List<Art>, ArtsyResponse, RandomMeResponse>(appExecutors) {
 
@@ -71,6 +86,7 @@ public class ArtRepository {
             @Override
             protected boolean shouldFetch(@Nullable List<Art> data) {
                 //Always fetch since this is a demo
+                //TODO: check if online first.
                 return true;
             }
 
@@ -112,18 +128,38 @@ public class ArtRepository {
         }.asLiveData();
     }
 
+    /**
+     * Get art by category
+     * @param category
+     * @return
+     */
     public LiveData<List<Art>> getArt(String category){
         return this.artDao.getArt(category);
     }
 
+    /***
+     * Get art by category and city
+     * @param category
+     * @param city
+     * @return
+     */
     public LiveData<List<Art>> getArt(String category, String city){
         return this.artDao.getArt(category,city);
     }
 
+    /**
+     * Get favorites
+     * @return
+     */
     public LiveData<List<Art>> getFavorites(){
         return this.artDao.getFavorites();
     }
 
+    /**
+     * Set art as Favorite
+     * @param id
+     * @param isFavorite
+     */
     public void setFavorite(String id, boolean isFavorite){
         appExecutors.diskIO().execute(() -> {
             this.artDao.setFavorite(id, isFavorite);

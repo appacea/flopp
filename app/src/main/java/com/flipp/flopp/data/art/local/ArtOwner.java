@@ -12,6 +12,9 @@ package com.flipp.flopp.data.art.local;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/***
+ * Class that represents Art Owner
+ */
 public class ArtOwner implements Parcelable {
 
     private String name;

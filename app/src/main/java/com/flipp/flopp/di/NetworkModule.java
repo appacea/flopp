@@ -35,12 +35,19 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Module to generate api injectables
+ */
 @Module
 public class NetworkModule {
 
     private static final String ARTSY_BASE_URL = "https://api.artsy.net/";
     private static final String RANDOMME_BASE_URL = "https://randomuser.me/";
 
+    /**
+     * Generate GSON
+     * @return
+     */
     @Provides
     @Singleton
     Gson provideGson() {
@@ -49,9 +56,11 @@ public class NetworkModule {
     }
 
 
-    /*
-     * The method returns the Cache object
-     * */
+    /**
+     * Generate Cache config
+     * @param application
+     * @return
+     */
     @Provides
     @Singleton
     Cache provideCache(Application application) {
@@ -60,12 +69,24 @@ public class NetworkModule {
         return new Cache(httpCacheDirectory, cacheSize);
     }
 
+    /**
+     * Generate Artsy API service holder
+     * Use holder pattern to avoid circular dependency in dagger since http client requires service and service requires http client
+     * @return
+     */
     @Provides
     @Singleton
     ArtsyServiceHolder artsyServiceHolder() {
         return new ArtsyServiceHolder();
     }
 
+    /**
+     * Generate http client
+     * @param application
+     * @param cache
+     * @param artsyServiceHolder
+     * @return
+     */
     @Provides
     @Singleton
     OkHttpClient provideOkhttpClient(Application application, Cache cache, ArtsyServiceHolder artsyServiceHolder) {
@@ -82,6 +103,12 @@ public class NetworkModule {
         return httpClient.build();
     }
 
+    /**
+     * Generate retrofit config for artsy api service
+     * @param gson
+     * @param okHttpClient
+     * @return
+     */
     @Singleton
     @Provides
     @Named("artsy")
@@ -94,6 +121,12 @@ public class NetworkModule {
     }
 
 
+    /***
+     * Generate retrofit config for randomme api service
+     * @param gson
+     * @param okHttpClient
+     * @return
+     */
     @Singleton
     @Provides
     @Named("randomme")
@@ -105,6 +138,12 @@ public class NetworkModule {
                 .build();
     }
 
+    /**
+     * Generate artsy api service
+     * @param retrofit
+     * @param artsyServiceHolder
+     * @return
+     */
     @Singleton
     @Provides
     static ArtsyService provideRetrofitArtsyService(@Named("artsy") Retrofit retrofit, ArtsyServiceHolder artsyServiceHolder) {
@@ -113,6 +152,11 @@ public class NetworkModule {
         return artsyService;
     }
 
+    /**
+     * Generate randomme api service
+     * @param retrofit
+     * @return
+     */
     @Singleton
     @Provides
     static RandomMeService provideRetrofitUserService(@Named("randomme") Retrofit retrofit) {

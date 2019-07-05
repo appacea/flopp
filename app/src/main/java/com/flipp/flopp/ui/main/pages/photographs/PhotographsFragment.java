@@ -30,6 +30,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+/***
+ * Fragment used to display artworks of category photograph
+ */
 public class PhotographsFragment extends Fragment {
 
     private RecyclerView recyclerView;

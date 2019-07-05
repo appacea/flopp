@@ -31,6 +31,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+/***
+ * Fragment used to display artworks of category painting
+ */
 public class PaintingsFragment extends Fragment {
 
     private RecyclerView recyclerView;

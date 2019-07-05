@@ -11,6 +11,9 @@ package com.flipp.flopp.data.art.network;
 
 import android.content.Context;
 
+/***
+ * Class to store and receive Artsy Authentication tokens
+ */
 public class ArtsyToken {
 
     private String token;

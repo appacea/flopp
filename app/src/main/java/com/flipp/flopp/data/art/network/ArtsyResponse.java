@@ -13,6 +13,9 @@ import com.flipp.flopp.data.art.local.Art;
 
 import java.util.List;
 
+/**
+ * Response from Artsy API
+ */
 public class ArtsyResponse {
 
     private int total_count;

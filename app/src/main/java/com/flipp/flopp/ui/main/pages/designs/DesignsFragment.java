@@ -30,6 +30,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+/***
+ * Fragment used to display artworks of category design
+ */
 public class DesignsFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -64,7 +67,7 @@ public class DesignsFragment extends Fragment {
         });
         recyclerView.setAdapter(adapter);
 
-
+        //Get master model
         model = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
 
         //Observe changes in designs list

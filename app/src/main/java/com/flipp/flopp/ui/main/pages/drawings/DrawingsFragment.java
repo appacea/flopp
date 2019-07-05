@@ -30,6 +30,10 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+/***
+ * Fragment used to display artworks of dawings design
+ */
 public class DrawingsFragment extends Fragment {
 
     private RecyclerView recyclerView;

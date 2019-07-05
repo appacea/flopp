@@ -16,6 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
+/**
+ * Helper class to generate a Livedata response for testing
+ */
 public class LiveDataUtil {
 
     /**

@@ -16,6 +16,9 @@ import android.graphics.Paint;
 
 import com.squareup.picasso.Transformation;
 
+/***
+ * Picasso transformation for circular image in imageview
+ */
 public class CircleTransform  implements Transformation {
 
     @Override

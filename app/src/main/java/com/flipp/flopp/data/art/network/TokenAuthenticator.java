@@ -19,6 +19,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.Route;
 
+/***
+ * Http Authenticator used to request Artsy access token
+ */
 public class TokenAuthenticator implements Authenticator {
 
     private Context context;
@@ -34,7 +37,7 @@ public class TokenAuthenticator implements Authenticator {
         if (artsyServiceHolder == null) {
             return null;
         }
-
+        //Get the ClientId and Secret and exchange it for the Access Token
         String clientId = ArtsyToken.getDefaultClientId(context);
         String secret = ArtsyToken.getDefaultSecret(context);
         ArtsyToken request = new ArtsyToken();

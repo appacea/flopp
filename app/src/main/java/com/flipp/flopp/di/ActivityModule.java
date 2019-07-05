@@ -15,6 +15,9 @@ import com.flipp.flopp.ui.main.MainActivity;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
+/**
+ * Dagger module for activity
+ */
 @Module
 public abstract class ActivityModule {
 

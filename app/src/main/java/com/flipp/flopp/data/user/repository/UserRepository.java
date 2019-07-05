@@ -13,19 +13,36 @@ import com.flipp.flopp.data.user.local.SessionStorage;
 
 import javax.inject.Inject;
 
+/**
+ * User Repository
+ *
+ * Handles User data
+ */
 public class UserRepository {
 
     private SessionStorage sessionStorage;
 
+    /**
+     * Create instance of user repository with session storage
+     * @param sessionStorage
+     */
     @Inject
     public UserRepository(SessionStorage sessionStorage){
         this.sessionStorage = sessionStorage;
     }
 
+    /**
+     * Get city from session
+     * @return
+     */
     public String getCity(){
         return this.sessionStorage.getCity();
     }
 
+    /**
+     * Save city in session
+     * @param city
+     */
     public void setCity(String city){
         this.sessionStorage.saveCity(city);
     }
