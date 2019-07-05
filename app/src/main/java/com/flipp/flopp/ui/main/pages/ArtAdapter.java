@@ -59,19 +59,22 @@ public class ArtAdapter extends RecyclerView.Adapter<ArtAdapter.ExploreViewHolde
         //Bind data to viewholder
         public void bind(final Art art, final OnArtClickedListener listener) {
             //Load thumbnail then large image
-            Picasso.get()
-                    .load(art.getThumbnailUrl()) // thumbnail url goes here
-                    .into(this.ivMain, new Callback() {
-                        @Override
-                        public void onSuccess() {
-                            Picasso.get().load(art.getLargeImageUrl()).into(ExploreViewHolder.this.ivMain);
-                        }
+            if(!art.getThumbnailUrl().isEmpty()){
+                Picasso.get()
+                        .load(art.getThumbnailUrl()) // thumbnail url goes here
+                        .into(this.ivMain, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                Picasso.get().load(art.getLargeImageUrl()).into(ExploreViewHolder.this.ivMain);
+                            }
 
-                        @Override
-                        public void onError(Exception e) {
+                            @Override
+                            public void onError(Exception e) {
 
-                        }
-                    });
+                            }
+                        });
+
+            }
             Picasso.get().load(art.getOwner().getThumbnail()).transform(new CircleTransform()).into(this.ivOwner);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {

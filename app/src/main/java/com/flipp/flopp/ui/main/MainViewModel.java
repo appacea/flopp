@@ -63,15 +63,15 @@ public class MainViewModel extends ViewModel {
                     }
                 };
             }
-            return artRepo.loadArt(city.getValue());
+                return artRepo.loadArt(city.getValue());
         });
 
         //For each category update the lists if all art changes.
 
         paintings = Transformations.switchMap(allArt, input -> {
-            int i = 0;
+
             if(input.status == Status.SUCCESS && !input.data.isEmpty()) {
-                return artRepo.getArt("Painting");
+                return artRepo.getArt("Painting",getCity());
             } else return new LiveData() {
                 @Override
                 protected void postValue(Object value) {
@@ -81,7 +81,7 @@ public class MainViewModel extends ViewModel {
         });
         sculptures= Transformations.switchMap(allArt, input -> {
             if(input.status == Status.SUCCESS && !input.data.isEmpty()) {
-                return artRepo.getArt("Sculpture");
+                return artRepo.getArt("Sculpture",getCity());
             } else return new LiveData() {
                 @Override
                 protected void postValue(Object value) {
@@ -92,7 +92,7 @@ public class MainViewModel extends ViewModel {
 
         drawings= Transformations.switchMap(allArt, input -> {
             if(input.status == Status.SUCCESS && !input.data.isEmpty()) {
-                return artRepo.getArt("Drawing, Collage or other Work on Paper");
+                return artRepo.getArt("Drawing, Collage or other Work on Paper",getCity());
             } else return new LiveData() {
                 @Override
                 protected void postValue(Object value) {
@@ -103,7 +103,7 @@ public class MainViewModel extends ViewModel {
 
         photographs= Transformations.switchMap(allArt, input -> {
             if(input.status == Status.SUCCESS && !input.data.isEmpty()) {
-                return artRepo.getArt("Photography");
+                return artRepo.getArt("Photography",getCity());
             } else return new LiveData() {
                 @Override
                 protected void postValue(Object value) {
@@ -114,7 +114,7 @@ public class MainViewModel extends ViewModel {
 
         designs= Transformations.switchMap(allArt, input -> {
             if(input.status == Status.SUCCESS && !input.data.isEmpty()) {
-                return artRepo.getArt("Design/Decorative Art");
+                return artRepo.getArt("Design/Decorative Art",getCity());
             } else return new LiveData() {
                 @Override
                 protected void postValue(Object value) {
@@ -149,8 +149,8 @@ public class MainViewModel extends ViewModel {
         return userRepo.getCity();
     }
     public void setCity(String city){
-        this.city.setValue(city);
         userRepo.setCity(city);
+        this.city.setValue(city);
     }
 
     //Get and Set the favorites

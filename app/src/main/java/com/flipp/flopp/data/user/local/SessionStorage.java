@@ -14,7 +14,7 @@ import android.content.SharedPreferences;
 public class SessionStorage {
 
     static private String KEY_CITY = "com.flipp.flopp.user.city";
-    static private String DEFAULT_CITY = "Anywhere";
+    static private String DEFAULT_CITY = "Montreal";
 
     private SharedPreferences prefs;
     public SessionStorage(SharedPreferences prefs){
@@ -22,10 +22,13 @@ public class SessionStorage {
     }
 
     public String getCity(){
-        return prefs.getString(KEY_CITY,DEFAULT_CITY);
+        String city = prefs.getString(KEY_CITY,DEFAULT_CITY);
+        return city;
     }
 
     public void saveCity(String city){
-        prefs.edit().putString(KEY_CITY, city);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(KEY_CITY, city);
+        editor.commit();
     }
 }
