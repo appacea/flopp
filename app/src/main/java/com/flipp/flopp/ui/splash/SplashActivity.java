@@ -39,7 +39,7 @@ public class SplashActivity extends AppCompatActivity {
         ivLogo.setVisibility(View.INVISIBLE);
         AlphaAnimation animation1 = new AlphaAnimation(0.0f, 1.0f);
         animation1.setFillAfter(true);
-        animation1.setDuration(1000);
+        animation1.setDuration(500);
         animation1.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
