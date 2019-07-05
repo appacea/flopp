@@ -46,7 +46,7 @@
                 app:srcCompat="@drawable/ic_baseline_favorite_border_24px" />
 
             <View
-                android:id="@+id/view2"
+                android:id="@+id/vSideBar"
                 android:layout_width="2dp"
                 android:background="@color/colorAccent"
                 android:layout_height="20dp"
@@ -74,12 +74,6 @@
             android:layout_marginTop="-2dp"
             android:background="@color/colorAccent" />
 
-        <View
-            android:id="@+id/vIndicatorAnimate"
-            android:layout_width="80dp"
-            android:layout_height="2dp"
-            android:layout_marginTop="-2dp"
-            android:background="@color/colorAccent" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tlMain;
     //Indicator to link favorites and tablayout
     private View vIndicator;
-    private View vIndicatorAnimate;
     //Imageview used to display favorites
     private ImageView ivFavorite;
     //Fragment that embeds a viewpager
@@ -172,8 +171,6 @@ public class MainActivity extends AppCompatActivity {
 
         vIndicator = findViewById(R.id.vIndicator);
         vIndicator.setVisibility(View.GONE);
-        vIndicatorAnimate= findViewById(R.id.vIndicatorAnimate);
-        vIndicatorAnimate.setVisibility(View.GONE);
         mainViewModel.city.setValue(mainViewModel.getCity());
 
     }

@@ -2,12 +2,12 @@
  * Copyright (c) Tchipr Ltd 2019. All right reserved.
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * Created by Yvan Stern on 7/4/19 12:43 PM
+ * Created by Yvan Stern on 7/5/19 7:48 AM
  *
- * Last modified 7/4/19 12:43 PM
+ * Last modified 7/5/19 7:19 AM
  */
 
-package com.flipp.flopp;
+package com.flipp.flopp.util;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;

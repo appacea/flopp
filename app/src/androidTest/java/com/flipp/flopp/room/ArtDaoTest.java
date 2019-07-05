@@ -2,18 +2,19 @@
  * Copyright (c) Tchipr Ltd 2019. All right reserved.
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * Created by Yvan Stern on 7/4/19 1:20 PM
+ * Created by Yvan Stern on 7/5/19 7:48 AM
  *
- * Last modified 7/4/19 1:15 PM
+ * Last modified 7/5/19 7:48 AM
  */
 
-package com.flipp.flopp;
+package com.flipp.flopp.room;
 
 import android.content.Context;
 
 import com.flipp.flopp.data.art.local.Art;
 import com.flipp.flopp.data.art.local.ArtDao;
 import com.flipp.flopp.data.art.local.ArtDatabase;
+import com.flipp.flopp.util.LiveDataUtil;
 
 import org.junit.After;
 import org.junit.Before;
